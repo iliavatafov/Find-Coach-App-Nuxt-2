@@ -1,32 +1,35 @@
 <template>
   <base-card>
-    <h2>Find Your Coach</h2>
-    <span class="filter-option">
+    <h2 class="my-2">Find Your Coach</h2>
+    <span class="mr-4">
       <input
         id="frontend"
+        class="align-middle"
         type="checkbox"
         :checked="activeFilters.frontend"
         @change="setFilter"
       />
-      <label for="frontend">Frontend</label>
+      <label class="align-middle ml-1" for="frontend">Frontend</label>
     </span>
-    <span class="filter-option">
+    <span class="mr-4">
       <input
         id="backend"
+        class="align-middle"
         type="checkbox"
         :checked="activeFilters.backend"
         @change="setFilter"
       />
-      <label for="backend">Backend</label>
+      <label class="align-middle ml-1" for="backend">Backend</label>
     </span>
-    <span class="filter-option">
+    <span class="mr-4">
       <input
         id="career"
+        class="align-middle"
         type="checkbox"
         :checked="activeFilters.career"
         @change="setFilter"
       />
-      <label for="career">Career</label>
+      <label class="align-middle ml-1" for="career">Career</label>
     </span>
   </base-card>
 </template>
@@ -53,26 +56,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-h2 {
-  margin: 0.5rem 0;
-}
-
-.filter-option {
-  margin-right: 1rem;
-}
-
-.filter-option label,
-.filter-option input {
-  vertical-align: middle;
-}
-
-.filter-option label {
-  margin-left: 0.25rem;
-}
-
-.filter-option.active label {
-  font-weight: bold;
-}
-</style>

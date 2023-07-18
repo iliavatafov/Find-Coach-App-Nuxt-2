@@ -1,9 +1,13 @@
 <template>
-  <li>
+  <li class="my-4 border border-gray-300 p-4">
     <div>
-      <a :href="emailLink">{{ email }}</a>
+      <a
+        class="text-[#3d008d] underline-none font-bold hover:text-[#8d007a] active:text-[#8d007a]"
+        :href="emailLink"
+        >{{ email }}</a
+      >
     </div>
-    <p>{{ message }}</p>
+    <p class="mt-2 mb-0">{{ message }}</p>
   </li>
 </template>
 
@@ -26,26 +30,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-li {
-  margin: 1rem 0;
-  border: 1px solid #ccc;
-  padding: 1rem;
-}
-
-a {
-  color: #3d008d;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover,
-a:active {
-  color: #8d007a;
-}
-
-p {
-  margin: 0.5rem 0 0 0;
-}
-</style>

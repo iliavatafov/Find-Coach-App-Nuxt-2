@@ -1,5 +1,8 @@
 <template>
-  <span class="badge" :class="type">
+  <span
+    class="px-6 py-2 bg-[#ccc] text-[#252525] rounded-3xl inline-block mr-2"
+    :class="type"
+  >
     {{ text }}
   </span>
 </template>
@@ -25,15 +28,6 @@ export default {
 </script>
 
 <style scoped>
-.badge {
-  background-color: #ccc;
-  color: #252525;
-  border-radius: 30px;
-  padding: 0.5rem 1.5rem;
-  display: inline-block;
-  margin-right: 0.5rem;
-}
-
 .frontend {
   background-color: #3d008d;
   color: white;

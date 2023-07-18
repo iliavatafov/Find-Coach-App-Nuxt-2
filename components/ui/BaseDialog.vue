@@ -1,24 +1,32 @@
 <template>
-  <teleport to="body">
-    <div v-if="show" class="backdrop" @click="tryClose"></div>
+  <portal to="body-dialog">
+    <div
+      v-if="show"
+      class="fixed top-0 left-0 h-screen w-full bg-[#000000bf] z-10"
+      @click="tryClose"
+    ></div>
     <transition name="dialog">
-      <dialog v-if="show" open>
-        <header>
+      <dialog
+        v-if="show"
+        open
+        class="fixed z-50 custom-top left-1/10 width-4/5 rounded-xl border-none default-shadow p-0 m-0 overflow-hidden bg-white"
+      >
+        <header class="bg-[#3a0061] text-white w-full p-4">
           <slot name="header">
-            <h2>{{ title }}</h2>
+            <h2 class="m-0">{{ title }}</h2>
           </slot>
         </header>
-        <section>
+        <section class="p-4">
           <slot></slot>
         </section>
-        <menu v-if="!fixed">
+        <menu v-if="!fixed" class="p-4 m-0 flex justify-end">
           <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
+            <button class="base-btn" @click="tryClose">Close</button>
           </slot>
         </menu>
       </dialog>
     </transition>
-  </teleport>
+  </portal>
 </template>
 
 <script>
@@ -52,53 +60,6 @@ export default {
 </script>
 
 <style scoped>
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 10;
-}
-
-dialog {
-  position: fixed;
-  top: 20vh;
-  left: 10%;
-  width: 80%;
-  z-index: 100;
-  border-radius: 12px;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: white;
-}
-
-header {
-  background-color: #3a0061;
-  color: white;
-  width: 100%;
-  padding: 1rem;
-}
-
-header h2 {
-  margin: 0;
-}
-
-section {
-  padding: 1rem;
-}
-
-menu {
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
-}
-
 .dialog-enter-from,
 .dialog-leave-to {
   opacity: 0;

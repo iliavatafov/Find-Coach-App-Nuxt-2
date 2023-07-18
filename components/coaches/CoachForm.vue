@@ -1,76 +1,124 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{ invalid: !firstName.isValid }">
-      <label for="firstname">Firstname</label>
+    <div class="my-2">
+      <label
+        class="base-label"
+        :class="{ 'text-red': !firstName.isValid }"
+        for="firstname"
+        >Firstname</label
+      >
       <input
         id="firstname"
         v-model.trim="firstName.val"
+        class="base-input"
+        :class="{ 'border border-solid border-red': !firstName.isValid }"
         type="text"
         @blur="clearValidity('firstName')"
       />
       <p v-if="!firstName.isValid">Firstname must not be empty.</p>
     </div>
-    <div class="form-control" :class="{ invalid: !lastName.isValid }">
-      <label for="lastname">Lastname</label>
+    <div class="my-2">
+      <label
+        class="base-label"
+        :class="{ 'text-red': !lastName.isValid }"
+        for="lastname"
+        >Lastname</label
+      >
       <input
         id="lastname"
         v-model.trim="lastName.val"
+        class="base-input"
+        :class="{ 'border border-solid border-red': !lastName.isValid }"
         type="text"
         @blur="clearValidity('lastName')"
       />
       <p v-if="!lastName.isValid">Lastname must not be empty.</p>
     </div>
-    <div class="form-control" :class="{ invalid: !description.isValid }">
-      <label for="description">Description</label>
+    <div class="my-2">
+      <label
+        class="base-label"
+        :class="{ 'text-red': !description.isValid }"
+        for="description"
+        >Description</label
+      >
       <textarea
         id="description"
         v-model.trim="description.val"
+        class="base-textarea"
+        :class="{ 'border border-solid border-red': !description.isValid }"
         rows="5"
         @blur="clearValidity('description')"
       ></textarea>
       <p v-if="!description.isValid">Description must not be empty.</p>
     </div>
-    <div class="form-control" :class="{ invalid: !rate.isValid }">
-      <label for="rate">Hourly Rate</label>
+    <div class="my-2" :class="{ invalid: !rate.isValid }">
+      <label
+        class="base-label"
+        :class="{ 'text-red': !rate.isValid }"
+        for="rate"
+        >Hourly Rate</label
+      >
       <input
         id="rate"
         v-model.number="rate.val"
+        class="base-input"
+        :class="{ 'border border-solid border-red': !rate.isValid }"
         type="number"
         @blur="clearValidity('rate')"
       />
       <p v-if="!rate.isValid">Rate must not be empty.</p>
     </div>
-    <div class="form-control" :class="{ invalid: !areas.isValid }">
-      <h3>Areas of Expertise</h3>
+    <div class="my-2">
+      <h3
+        class="my-2 text-base font-bold"
+        :class="{ 'text-red': !areas.isValid }"
+      >
+        Areas of Expertise
+      </h3>
       <div>
         <input
           id="frontend"
           v-model="areas.val"
+          class="inline w-auto border-none focus:outline-[#3d008d] focus:border-[#3d008d]"
+          :class="{ 'border border-solid border-red': !areas.isValid }"
           type="checkbox"
           value="frontend"
           @blur="clearValidity('areas')"
         />
-        <label for="frontend">Frontend Development</label>
+        <label class="font-normal inline ml-2" for="frontend"
+          >Frontend Development</label
+        >
       </div>
       <div>
         <input
           id="backend"
           v-model="areas.val"
+          class="inline w-auto border-none focus:outline-[#3d008d] focus:border-[#3d008d]"
+          :class="{ 'border border-solid border-red bg-red': !areas.isValid }"
           type="checkbox"
           value="backend"
           @blur="clearValidity('areas')"
         />
-        <label for="backend">Backend Development</label>
+        <label class="font-normal inline ml-2" for="backend"
+          >Backend Development</label
+        >
       </div>
       <div>
         <input
           id="career"
           v-model="areas.val"
+          :class="
+            !areas.isValid
+              ? 'border border-solid border-red'
+              : 'inline w-auto border-none focus:outline-[#3d008d] focus:border-[#3d008d]'
+          "
           type="checkbox"
           value="career"
           @blur="clearValidity('areas')"
         />
-        <label for="career">Career Advisory</label>
+        <label class="font-normal inline ml-2" for="career"
+          >Career Advisory</label
+        >
       </div>
       <p v-if="!areas.isValid">At least one experties must be selected.</p>
     </div>
@@ -154,60 +202,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.form-control {
-  margin: 0.5rem 0;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-input[type='checkbox'] + label {
-  font-weight: normal;
-  display: inline;
-  margin: 0 0 0 0.5rem;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  border: 1px solid #ccc;
-  font: inherit;
-}
-
-input:focus,
-textarea:focus {
-  background-color: #f0e6fd;
-  outline: none;
-  border-color: #3d008d;
-}
-
-input[type='checkbox'] {
-  display: inline;
-  width: auto;
-  border: none;
-}
-
-input[type='checkbox']:focus {
-  outline: #3d008d solid 1px;
-}
-
-h3 {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
-.invalid label {
-  color: red;
-}
-
-.invalid input,
-.invalid textarea {
-  border: 1px solid red;
-}
-</style>

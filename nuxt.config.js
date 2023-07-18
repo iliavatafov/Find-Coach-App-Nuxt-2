@@ -17,8 +17,18 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '*',
+        component: resolve(__dirname, 'pages/errors/index.vue'),
+      })
+    },
+    middleware: ['redirect-root'],
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['~/assets/css/tailwind.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [{ src: '~/plugins/global-components', mode: 'client' }],
@@ -35,7 +45,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['portal-vue/nuxt'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

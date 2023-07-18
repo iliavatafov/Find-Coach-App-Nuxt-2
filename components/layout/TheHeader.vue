@@ -4,7 +4,6 @@
       <div class="left-nav">
         <h1><nuxt-link to="/">Find a Coach</nuxt-link></h1>
         <div>
-          <!-- <nuxt-link to="/coaches">All Coaches</nuxt-link> -->
           <div class="dynamic-links">
             <nuxt-link
               v-for="(getBreadcrumb, index) in getBreadcrumbs"
@@ -25,7 +24,7 @@
           <nuxt-link to="/auth">Login</nuxt-link>
         </li>
         <li v-if="isLoggedIn">
-          <base-button @click="logout">Logout</base-button>
+          <button @click="logout">Logout</button>
         </li>
       </ul>
     </nav>
@@ -57,7 +56,10 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout')
-      this.$router.replace('/coaches')
+      const currentPath = this.$router.currentRoute.path
+      if (currentPath !== '/coaches') {
+        this.$router.replace('/coaches')
+      }
     },
     showDivider(index) {
       if (this.isNeastedRoutes && this.routesDataLastIndex !== index) {
@@ -65,57 +67,6 @@ export default {
       }
     },
   },
-  // watch: {
-  //   getBreadcrumbs(value) {
-  //     if (value.length > 0) {
-  //       this.isBreadcrumbs = true;
-  //     }
-  //   },
-  // },
-  // watch: {
-  //   "$route.params": {
-  //     handler: function (params) {
-  //       // Set routesData to inicial state
-  //       this.routesData = [
-  //         {
-  //           text: "All Coaches",
-  //           href: "/coaches",
-  //         },
-  //       ];
-  //       // Create dynamic variable for href
-  //       let href = "/coaches";
-
-  //       // Walk throw all params in route object and push text and href in routesData for each param
-  //       for (const param in params) {
-  //         let text = "";
-
-  //         // Check is param is id and if it is select the coach with the same id and assign coach full name as a text
-  //         if (param.includes("id")) {
-  //           // Fetch data from rest API
-  //           const coach = this.coaches.find(
-  //             (coach) => coach.id === params[param]
-  //           );
-
-  //           text = coach.firstName + " " + coach.lastName;
-  //         } else {
-  //           // Assign param value as text and capitalize first letter
-  //           text =
-  //             params[param].charAt(0).toUpperCase() + params[param].slice(1);
-  //         }
-
-  //         // Add param to the href
-  //         href = href + "/" + params[param];
-
-  //         this.routesData.push({
-  //           text,
-  //           href,
-  //         });
-  //       }
-  //     },
-  //     deep: true,
-  //     immediate: true,
-  //   },
-  // },
 }
 </script>
 
@@ -139,7 +90,7 @@ header a {
 
 a:active,
 a:hover,
-a.nuxt-link-active {
+a.nuxt-link-exact-active {
   border: 1px solid #f391e3;
 }
 
@@ -161,7 +112,7 @@ header .dynamic-link {
 
 header .dynamic-link:hover,
 header .dynamic-link:active,
-header .dynamic-link.nuxt-link-active {
+header .dynamic-link.nuxt-link-exact-active {
   font-weight: 900;
   border: none;
 }
@@ -172,6 +123,8 @@ span {
 
 h1 {
   margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 h1 a {
@@ -181,7 +134,7 @@ h1 a {
 
 h1 a:hover,
 h1 a:active,
-h1 a.nuxt-link-active {
+h1 a.nuxt-link-exact-active {
   border-color: transparent;
 }
 
@@ -210,5 +163,24 @@ li {
 .left-nav {
   display: flex;
   align-items: center;
+}
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
 }
 </style>

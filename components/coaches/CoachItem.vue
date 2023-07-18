@@ -1,8 +1,8 @@
 <template>
-  <li>
-    <h3>{{ fullName }}</h3>
-    <h4>${{ rate }}/hour</h4>
-    <div>
+  <li class="my-4 border border-solid border-gray-700 rounded-lg p-4">
+    <h3 class="text-lg font-bold my-2">{{ fullName }}</h3>
+    <h4 class="my-2">${{ rate }}/hour</h4>
+    <div class="my-2">
       <base-badge
         v-for="area of areas"
         :key="area"
@@ -10,7 +10,7 @@
         :title="area"
       ></base-badge>
     </div>
-    <div class="actions">
+    <div class="flex justify-end my-2">
       <base-button mode="outline" link :to="coachContactLink"
         >Contact</base-button
       >
@@ -56,30 +56,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-li {
-  margin: 1rem 0;
-  border: 1px solid #424242;
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-h3,
-h4 {
-  margin: 0.5rem 0;
-}
-
-div {
-  margin: 0.5rem 0;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-}
-</style>

@@ -24,7 +24,9 @@ export const getters = {
     return state.email
   },
 }
+
 let timer
+
 export const actions = {
   login(context, payload) {
     return context.dispatch('auth', {

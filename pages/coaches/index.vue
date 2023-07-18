@@ -1,13 +1,16 @@
 <template>
-  <div v-if="newCoaches || errorData.isError" class="import-wrapper">
-    <!-- <base-dialog
-      v-if="errorMessage"
+  <div
+    v-if="newCoaches || errorData.isError"
+    class="flex flex-col items-center mt-10 mb-10"
+  >
+    <base-dialog
+      v-if="errorData.errorMessage"
       :show="!!errorData.isError"
       :title="errorData.errorMessage"
       @close="handleFileUploadError"
     >
       <p>{{ error }}</p>
-    </base-dialog> -->
+    </base-dialog>
     <confirm-imported-coaches
       :new-coaches="newCoaches"
       :cancel-import="cancelImport"
@@ -17,28 +20,29 @@
   <div v-else>
     <router-view></router-view>
     <div>
-      <!-- <base-dialog
+      <base-dialog
         :show="!!error"
         title="An error occured!"
         @close="handleError"
       >
         <p>{{ error }}</p>
-      </base-dialog> -->
+      </base-dialog>
       <section>
         <coach-filter></coach-filter>
       </section>
       <section>
         <base-card>
-          <div class="controls">
-            <base-button mode="outline" @click="loadCoaches(true)"
-              >Refresh</base-button
-            >
+          <div class="flex justify-between">
+            <button class="refresh-btn" @click="loadCoaches(true)">
+              Refresh
+            </button>
             <div v-if="isLoggedIn">
-              <label for="file-upload" class="custom-file-upload">
+              <label for="file-upload" class="base-btn">
                 Upload coaches CSV
               </label>
               <input
                 id="file-upload"
+                class="hidden"
                 type="file"
                 accept=".csv"
                 @change="handleFileUpload"
@@ -57,7 +61,7 @@
           <div v-if="isLoading">
             <base-spinner></base-spinner>
           </div>
-          <ul v-else-if="hasCoaches">
+          <ul v-else-if="hasCoaches" class="m-0 p-0 list-none">
             <coach-item
               v-for="coach in filterCoaches"
               :id="coach.id"
@@ -68,7 +72,7 @@
               :areas="coach.areas"
             ></coach-item>
           </ul>
-          <h3 v-else>No coaches found.</h3>
+          <h3 v-else class="mt-4">No coaches found.</h3>
         </base-card>
       </section>
     </div>
@@ -174,47 +178,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.import-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
-}
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
-}
-
-input[type='file'] {
-  display: none;
-}
-
-.custom-file-upload {
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  font: inherit;
-  background-color: #3a0061;
-  border: 1px solid #3a0061;
-  color: white;
-  cursor: pointer;
-  border-radius: 30px;
-  margin-right: 0.5rem;
-  display: inline-block;
-}
-
-.custom-file-upload:hover,
-.custom-file-upload:active {
-  background-color: #270041;
-  border-color: #270041;
-}
-</style>

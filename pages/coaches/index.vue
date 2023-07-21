@@ -113,24 +113,8 @@ export default {
     filterCoaches() {
       // Get coaches list from Vuex and save it in variable
       const coaches = this.$store.getters['coaches/coaches']
-
+      return this.filter(coaches)
       // Filter coaches depends on checked activeFilters
-      return coaches.filter((coach) => {
-        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
-          return true
-        } else if (
-          this.activeFilters.backend &&
-          coach.areas.includes('backend')
-        ) {
-          return true
-        } else if (
-          this.activeFilters.career &&
-          coach.areas.includes('career')
-        ) {
-          return true
-        }
-        return false
-      })
     },
     hasCoaches() {
       // Check are any coaches stored in the Vuex store
@@ -174,6 +158,24 @@ export default {
     },
     cancelImport() {
       this.newCoaches = null
+    },
+    filter(coaches) {
+      return coaches.filter((coach) => {
+        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
+          return true
+        } else if (
+          this.activeFilters.backend &&
+          coach.areas.includes('backend')
+        ) {
+          return true
+        } else if (
+          this.activeFilters.career &&
+          coach.areas.includes('career')
+        ) {
+          return true
+        }
+        return false
+      })
     },
   },
 }

@@ -26,11 +26,11 @@
           rows="5"
         ></textarea>
       </div>
-      <p v-if="!formIsValid" class="fw-bold text-red">
+      <p v-if="!formIsValid" class="fw-bold text-red invalid">
         Please enter a valid input and non-empty message
       </p>
       <div class="text-center mt-5">
-        <base-button>Send Message</base-button>
+        <button class="base-btn">Send Message</button>
       </div>
     </form>
   </base-card>

@@ -14,7 +14,7 @@
       <base-card>
         <header>
           <h2>Interested? Reach out now!</h2>
-          <base-button link :to="linkToContacts">Contact</base-button>
+          <nuxt-link class="base-btn" :to="linkToContacts">Contact</nuxt-link>
         </header>
       </base-card>
     </section>

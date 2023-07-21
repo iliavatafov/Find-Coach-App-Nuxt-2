@@ -21,7 +21,7 @@
           <nuxt-link to="/requests">Requests</nuxt-link>
         </li>
         <li v-else>
-          <nuxt-link to="/auth">Login</nuxt-link>
+          <nuxt-link class="login-link" to="/auth">Login</nuxt-link>
         </li>
         <li v-if="isLoggedIn">
           <button @click="logout">Logout</button>

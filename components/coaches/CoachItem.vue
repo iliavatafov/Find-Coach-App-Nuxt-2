@@ -1,6 +1,6 @@
 <template>
   <li class="my-4 border border-solid border-gray-700 rounded-lg p-4">
-    <h3 class="text-lg font-bold my-2">{{ fullName }}</h3>
+    <h3 id="name" class="text-lg font-bold my-2">{{ fullName }}</h3>
     <h4 class="my-2">${{ rate }}/hour</h4>
     <div class="my-2">
       <base-badge
@@ -8,13 +8,16 @@
         :key="area"
         :type="area"
         :title="area"
+        class="base-badge"
       ></base-badge>
     </div>
     <div class="flex justify-end my-2">
-      <base-button mode="outline" link :to="coachContactLink"
-        >Contact</base-button
+      <nuxt-link class="outline base-btn" :to="coachContactLink"
+        >Contact</nuxt-link
       >
-      <base-button link :to="coachDetailsLink">View Details</base-button>
+      <nuxt-link class="details-link base-btn" :to="coachDetailsLink"
+        >View Details</nuxt-link
+      >
     </div>
   </li>
 </template>
@@ -56,3 +59,16 @@ export default {
   },
 }
 </script>
+
+<style>
+.outline {
+  background-color: transparent;
+  border-color: #270041;
+  color: #270041;
+}
+
+.outline:hover,
+.outline:active {
+  background-color: #edd2ff;
+}
+</style>

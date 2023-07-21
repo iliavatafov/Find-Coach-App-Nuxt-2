@@ -34,10 +34,7 @@
             type="password"
           />
         </div>
-        <p v-if="!formIsValid">
-          Please enter valid email and password (must be at least 6 characters
-          long)
-        </p>
+        <p v-if="!formIsValid">Please enter valid email and password</p>
         <button class="base-btn">
           {{ submitButtonCaption }}
         </button>
@@ -107,7 +104,7 @@ export default {
       }
 
       try {
-        // Perform POST request based on the mode if login mode, login request if singup, register request
+        // Perform POST request based on the mode if login mode, login request if signup, register request
         if (this.mode === 'login') {
           await this.$store.dispatch('login', actionPayload)
         } else {
@@ -124,7 +121,7 @@ export default {
 
     switchAuthMode() {
       if (this.mode === 'login') {
-        this.mode = 'singup'
+        this.mode = 'signup'
       } else {
         this.mode = 'login'
       }

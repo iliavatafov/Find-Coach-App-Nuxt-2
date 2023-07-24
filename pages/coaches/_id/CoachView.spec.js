@@ -1,6 +1,7 @@
-import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { nextTick } from 'vue'
+import { mount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
+
 import CoachView from '~/pages/coaches/_id/index.vue'
 
 const localVue = createLocalVue()
@@ -11,7 +12,7 @@ const store = new Vuex.Store({
   modules: {
     breadcrumbs: {
       actions: {
-        getBreadcrumbs: jest.fn(),
+        setBreadcrumbs: jest.fn(),
       },
       getters: {
         getBreadcrumbs: () => [],
@@ -64,7 +65,7 @@ describe('Details page', () => {
     wrapper.destroy()
   })
 
-  it('Render the component', async () => {
+  it('Render the component with passed data', async () => {
     await nextTick()
 
     expect(wrapper.find('h2').text()).toBe('Ilia Vatafov')

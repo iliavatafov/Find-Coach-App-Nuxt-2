@@ -1,7 +1,12 @@
-import { mount } from '@vue/test-utils'
+import Vue from 'vue'
 import { nextTick } from 'vue'
 
+import { mount } from '@vue/test-utils'
+
+import BaseSpinner from '~/components/ui/BaseSpinner.vue'
 import Requests from '~/pages/requests/index.vue'
+
+Vue.component('base-spinner', BaseSpinner)
 
 describe('MyComponent', () => {
   it('renders message when no received requests', async () => {
@@ -16,6 +21,11 @@ describe('MyComponent', () => {
           },
           dispatch: jest.fn(),
         },
+      },
+      stubs: {
+        'base-card': true,
+        'base-dialog': true,
+        portal: true,
       },
     })
 

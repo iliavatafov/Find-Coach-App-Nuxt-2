@@ -1,6 +1,9 @@
+import Vue from 'vue'
 import { RouterLinkStub, mount } from '@vue/test-utils'
 
 import CoachItem from '~/components/coaches/CoachItem.vue'
+
+Vue.component('nuxt-link', RouterLinkStub)
 
 describe('CoachItem.vue', () => {
   it('renders the full name correctly', () => {
@@ -20,7 +23,6 @@ describe('CoachItem.vue', () => {
         'base-badge': {
           template: '<span></span>',
         },
-        'nuxt-link': RouterLinkStub,
       },
     })
 
@@ -121,6 +123,6 @@ describe('CoachItem.vue', () => {
 
     const detailsButton = wrapper.find('.details-link')
 
-    expect(detailsButton.attributes('to')).toBe(expectedLink)
+    expect(detailsButton.props('to')).toBe(expectedLink)
   })
 })

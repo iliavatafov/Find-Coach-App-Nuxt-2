@@ -1,9 +1,7 @@
-import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
+import { mount, createLocalVue } from '@vue/test-utils'
 
 import Contact from '~/pages/coaches/_id/contact/index.vue'
-import BaseCard from '~/components/ui/BaseCard.vue'
-import BaseDialog from '~/components/ui/BaseDialog.vue'
 
 const localVue = createLocalVue()
 
@@ -59,8 +57,8 @@ describe('Contact page', () => {
         },
       },
       stubs: {
-        'base-card': BaseCard,
-        'base-dialog': BaseDialog,
+        'base-card': true,
+        'base-dialog': true,
         portal: true,
       },
     })

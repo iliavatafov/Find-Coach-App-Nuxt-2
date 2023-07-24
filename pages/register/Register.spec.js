@@ -1,6 +1,14 @@
+import Vue from 'vue'
 import { mount } from '@vue/test-utils'
+import { Portal } from 'portal-vue'
 
+import BaseCard from '~/components/ui/BaseCard.vue'
+import BaseDialog from '~/components/ui/BaseDialog.vue'
 import RegisterAsACoach from '~/pages/register/index.vue'
+
+Vue.component('base-card', BaseCard)
+Vue.component('base-dialog', BaseDialog)
+Vue.component('portal', Portal)
 
 describe('Register as coach', () => {
   it('Renders the component', () => {
@@ -10,12 +18,15 @@ describe('Register as coach', () => {
     expect(wrapper.find('form').exists()).toBe(true)
   })
 
-  it('Pass correct data to the store submit', async () => {
+  it('Pass correct data to the store when submit', async () => {
     const wrapper = mount(RegisterAsACoach, {
       mocks: {
         $store: {
           dispatch: jest.fn(),
         },
+      },
+      stubs: {
+        'base-spinner': true,
       },
     })
     await wrapper.find('input#firstname').setValue('Peter')

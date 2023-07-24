@@ -122,7 +122,7 @@
       </div>
       <p v-if="!areas.isValid">At least one experties must be selected.</p>
     </div>
-    <base-button>Register</base-button>
+    <button class="base-btn">Register</button>
     <p v-if="!formIsValid">Please fix the above errors and submit again.</p>
   </form>
 </template>

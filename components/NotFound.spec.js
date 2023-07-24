@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from '@vue/test-utils'
 
-import NotFound from '~/components/NotFound.vue'
 import BaseCard from '~/components/ui/BaseCard.vue'
+import NotFound from '~/components/NotFound.vue'
 
 describe('NotFound.vue', () => {
   let wrapper

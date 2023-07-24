@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'BaseBadge',
   props: {
     type: {
       type: String,

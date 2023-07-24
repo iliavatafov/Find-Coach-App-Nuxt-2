@@ -32,6 +32,9 @@ const store = new Vuex.Store({
         ],
         getFilters: () => ['frontend', 'career', 'backend'],
       },
+      actions: {
+        loadCoaches: jest.fn(),
+      },
       namespaced: true,
     },
     actions: {
@@ -54,6 +57,15 @@ describe('CoachList', () => {
             id: 'nPupjajmTnRj6r04UmwRljpMcjh1',
           },
         },
+      },
+      stubs: {
+        'nuxt-link': true,
+        'base-badge': true,
+        'base-button': true,
+        'base-card': true,
+        'base-dialog': true,
+        'base-spinner': true,
+        portal: true,
       },
       data: () => ({
         isLoading: false,

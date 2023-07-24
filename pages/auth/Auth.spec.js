@@ -1,6 +1,16 @@
+import Vue from 'vue'
 import { mount } from '@vue/test-utils'
+import { Portal } from 'portal-vue'
 
+import BaseSpinner from '~/components/ui/BaseSpinner.vue'
+import BaseCard from '~/components/ui/BaseCard.vue'
+import BaseDialog from '~/components/ui/BaseDialog.vue'
 import Auth from '~/pages/auth/index.vue'
+
+Vue.component('base-spinner', BaseSpinner)
+Vue.component('base-card', BaseCard)
+Vue.component('base-dialog', BaseDialog)
+Vue.component('portal', Portal)
 
 describe('Auth.vue', () => {
   it('renders the component', () => {
@@ -12,7 +22,7 @@ describe('Auth.vue', () => {
     const wrapper = mount(Auth)
     await wrapper.find('form').trigger('submit.prevent')
 
-    expect(wrapper.findAll('p').at(1).text()).toBe(
+    expect(wrapper.findAll('p').at(0).text()).toBe(
       'Please enter valid email and password'
     )
   })

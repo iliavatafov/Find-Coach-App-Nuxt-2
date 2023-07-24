@@ -13,6 +13,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'BaseSpinner',
+}
+</script>
+
 <style scoped>
 .spinner {
   display: flex;

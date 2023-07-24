@@ -18,7 +18,7 @@
     ></confirm-imported-coaches>
   </div>
   <div v-else>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <div>
       <base-dialog
         :show="!!error"

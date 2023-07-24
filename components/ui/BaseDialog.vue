@@ -31,6 +31,7 @@
 
 <script>
 export default {
+  name: 'BaseDialog',
   props: {
     show: {
       type: Boolean,

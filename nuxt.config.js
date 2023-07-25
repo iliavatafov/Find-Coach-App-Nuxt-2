@@ -2,6 +2,8 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  mode: 'spa',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Find-Coach-App',
@@ -49,4 +51,21 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  env: {
+    baseUrl:
+      'https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app',
+  },
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in',
+  },
+
+  loading: {
+    color: '#f391e3',
+    height: '4px',
+    duration: 5000,
+    throttle: 0,
+  },
 }

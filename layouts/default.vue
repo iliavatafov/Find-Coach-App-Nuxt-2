@@ -2,7 +2,7 @@
   <div>
     <portal-target name="body-dialog"></portal-target>
     <base-dialog
-      v-if="error"
+      v-if="!isLoading && error"
       :show="!!error"
       :title="error"
       @close="handleError"

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { generateUserId } from '~/utils/idGenerator'
 
 export const state = () => {
@@ -57,17 +58,12 @@ export const actions = {
       areas: data.areas,
     }
 
-    const url = `https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json?auth=${token}`
+    const url = `${process.env.baseUrl}/coaches/${userId}.json?auth=${token}`
 
-    const response = await fetch(url, {
-      method: 'PUT',
-      body: JSON.stringify(coachData),
-    })
+    const response = await axios.put(url, coachData)
 
-    await response.json()
-
-    if (!response.ok) {
-      const error = new Error(response.message || 'Faild to fetch!')
+    if (response.statusText !== 'OK') {
+      const error = new Error('Faild to fetch!')
       throw error
     }
 
@@ -81,34 +77,32 @@ export const actions = {
       return
     }
 
-    const url = `https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
+    const url = `${process.env.baseUrl}/coaches.json`
 
-    const response = await fetch(url)
+    const response = await axios.get(url)
 
-    const responseData = await response.json()
-
-    if (!response.ok) {
-      const error = new Error(response.message || 'Faild to fetch!')
+    if (response.statusText !== 'OK') {
+      const error = new Error('Faild to fetch!')
       throw error
     }
 
     const coaches = []
 
-    for (const key in responseData) {
+    for (const key in response.data) {
       const coach = {
         id: key,
-        firstName: responseData[key].firstName,
-        lastName: responseData[key].lastName,
-        description: responseData[key].description,
-        hourlyRate: responseData[key].hourlyRate,
-        areas: responseData[key].areas,
+        firstName: response.data[key].firstName,
+        lastName: response.data[key].lastName,
+        description: response.data[key].description,
+        hourlyRate: response.data[key].hourlyRate,
+        areas: response.data[key].areas,
       }
 
       coaches.push(coach)
     }
 
     context.commit('setCoaches', coaches)
-    context.commit('setRawCoaches', responseData)
+    context.commit('setRawCoaches', response.data)
     context.commit('setFetchTimestamp')
   },
   setFilter(context, payload) {
@@ -127,15 +121,12 @@ export const actions = {
       ? Object.assign(currentCoaches, newCoaches)
       : newCoaches
 
-    const url = `https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
+    const url = `${process.env.baseUrl}/coaches.json`
 
-    const response = await fetch(url, {
-      method: 'PUT',
-      body: JSON.stringify(mergedCoaches),
-    })
+    const response = await axios.put(url, mergedCoaches)
 
-    if (!response.ok) {
-      const error = new Error(response.message || 'Faild to post!')
+    if (response.statusText !== 'OK') {
+      const error = new Error('Faild to post!')
       throw error
     }
 

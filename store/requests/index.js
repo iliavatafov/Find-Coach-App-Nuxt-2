@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const state = () => {
   return {
     requests: [],
@@ -21,21 +23,16 @@ export const actions = {
       message: payload.message,
     }
 
-    const url = `https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app/requests/${payload.coachId}.json`
+    const url = `${process.env.baseUrl}/requests/${payload.coachId}.json`
 
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(newRequest),
-    })
+    const response = await axios.post(url, newRequest)
 
-    const responseData = await response.json()
-
-    if (!response.ok) {
-      const error = new Error(responseData.message || 'Faild to send request.')
+    if (response.statusText !== 'OK') {
+      const error = new Error('Faild to send request.')
       throw error
     }
 
-    newRequest.id = responseData.name
+    newRequest.id = response.data.name
     newRequest.coachId = payload.coachId
 
     context.commit('addRequest', newRequest)
@@ -44,27 +41,23 @@ export const actions = {
     const coachId = context.rootGetters.userId
     const token = context.rootGetters.token
 
-    const url = `https://vue-http-demo-6f676-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json?auth=${token}`
+    const url = `${process.env.baseUrl}/requests/${coachId}.json?auth=${token}`
 
-    const response = await fetch(url)
+    const response = await axios.get(url)
 
-    const responseData = await response.json()
-
-    if (!response.ok) {
-      const error = new Error(
-        responseData.message || 'Failed to fetch requests.'
-      )
+    if (response.statusText !== 'OK') {
+      const error = new Error('Failed to fetch requests.')
       throw error
     }
 
     const requests = []
 
-    for (const key in responseData) {
+    for (const key in response.data) {
       const request = {
         id: key,
         coachId,
-        userEmail: responseData[key].userEmail,
-        message: responseData[key].message,
+        userEmail: response.data[key].userEmail,
+        message: response.data[key].message,
       }
 
       requests.push(request)
